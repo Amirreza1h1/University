@@ -1,86 +1,3 @@
-# import random
-# #chicken game
-
-# #rule 
-# rule = {
-#     ('Trusting', 'Trusting'): (1, 1),
-#     ('Trusting', 'Defiant'): (0, 3),
-#     ('Defiant', 'Trusting'): (3, 0),
-#     ('Defiant', 'Defiant'): (-100, -100) # dead!
-# }
-
-# class Bot_Player:
-#     def __init__(self, type):
-#         self.type = type
-#         self.score=100
-
-#     def update_score(self, outcome):
-#         ...
-
-# class AlwaysBetray(Bot_Player):
-#     def __init__(self):
-#         super().__init__("AlwaysBetray")
-
-#     def play(self, history):
-#         return "Defiant"
-
-# class AlwaysCooperate(Bot_Player):
-#     def __init__(self):
-#         super().__init__("AlwaysCooperate")
-
-#     def play(self, history):
-#         return "Trusting"
-    
-# class Copycat(Bot_Player):
-#     def __init__(self):
-#         super().__init__("Copycat")
-#         self.opponent_last_move = None
-
-#     def play(self, history):
-#         if not history:
-#             return "Trusting"
-#         else:
-#             self.opponent_last_move = history[-1][1]
-#             return self.opponent_last_move
-        
-# class Random(Bot_Player):
-#     def __init__(self):
-#         super().__init__("Random")
-#         self.moves = ('Trusting', 'Defiant')
-
-#     def play(self, history):
-#         return random.choice(self.moves)
-
-# # def fitness(player):
-# #     # Define how fitness is calculated
-# #     pass
-
-# # def selection(population):
-# #     # Select the best-performing players
-# #     pass
-
-# # def crossover(parent1, parent2):
-# #     # Combine traits from parent players
-# #     pass
-
-# # def mutate(player):
-# #     # Introduce small random changes
-# #     pass
-
-# # Initialize population
-# # population = [Player(random.choice(["Cooperator", "Defector"])) for _ in range(100)]
-
-# # # Run genetic algorithm
-# # for generation in range(100):
-# #     selected = selection(population)
-# #     new_population = []
-# #     for i in range(len(selected)):
-# #         parent1, parent2 = random.sample(selected, 2)
-# #         offspring = crossover(parent1, parent2)
-# #         mutate(offspring)
-# #         new_population.append(offspring)
-# #     population = new_population
-
 import random
 import matplotlib.pyplot as plt
 
@@ -156,8 +73,8 @@ def play_round(player1, player2, history):
     move2 = player2.play(history)
     history.append((move1, move2))
     outcome1, outcome2 = rule[(move1, move2)]
-    print(outcome1)
-    print(outcome2)
+    # print(outcome1)
+    # print(outcome2)
 
     
     # Update the players' scores
@@ -234,21 +151,59 @@ def simulate_game_population(population, rounds):
     plt.legend()
     plt.show()
 
-# Generate a population of players
-def generate_population(n):
-    population = []
-    for _ in range(n // 4):
-        population.append(AlwaysBetray())
-        population.append(AlwaysCooperate())
-        population.append(Copycat())
-        population.append(RandomPlayer())
-    return population
 
-# Number of players and rounds
-population_size = 200  # Adjust population size as needed
+def get_bot_numbers():
+    bot_numbers = {}
+    
+    print("\nEnter the number of bots for each category:")
+    always_betray = int(input("AlwaysBetray: "))
+    always_cooperate = int(input("AlwaysCooperate: "))
+    copycat = int(input("Copycat: "))
+    random_player = int(input("Random: "))
+    
+    bot_numbers['AlwaysBetray'] = always_betray
+    bot_numbers['AlwaysCooperate'] = always_cooperate
+    bot_numbers['Copycat'] = copycat
+    bot_numbers['Random'] = random_player
+    
+    return bot_numbers
+
+# Get user input for bot numbers
+bot_numbers = get_bot_numbers()
+
+# Initialize the population based on user input
+population = []
+for _ in range(bot_numbers['AlwaysBetray']):
+    population.append(AlwaysBetray())
+for _ in range(bot_numbers['AlwaysCooperate']):
+    population.append(AlwaysCooperate())
+for _ in range(bot_numbers['Copycat']):
+    population.append(Copycat())
+for _ in range(bot_numbers['Random']):
+    population.append(RandomPlayer())
+
+
+# Generate a population of players
+# def generate_population(n):
+#     population = []
+
+#     # for _ in range(n // 4):
+#     #     population.append(AlwaysBetray())
+#     #     population.append(AlwaysCooperate())
+#     #     population.append(Copycat())
+#     #     population.append(RandomPlayer())
+#     return population
+
+# # Number of players and rounds
+# population_size = 200  # Adjust population size as needed
 rounds = 500  # Adjust the number of rounds
 
-# Create the population and simulate the game
-population = generate_population(population_size)
+# # Create the population and simulate the game
+# population = generate_population(population_size)
 simulate_game_population(population, rounds)
 
+# population = []
+# for i in range(4):
+#     x = int(input(
+#         "Enter the number of bots per category:AlwaysBetray,AlwaysCooperate,Copycat,Random:"))
+#     population.append(x)
