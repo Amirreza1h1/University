@@ -5,9 +5,9 @@ import numpy as np  # For calculating median
 
 # Rule of outcomes for the chicken game
 rule = {
-    ('Trusting', 'Trusting'): (0, 0),
-    ('Trusting', 'Defiant'): (1, 3),
-    ('Defiant', 'Trusting'): (3, 1),
+    ('Trusting', 'Trusting'): (-2, -2),
+    ('Trusting', 'Defiant'): (-2, 3),
+    ('Defiant', 'Trusting'): (3, -250),
     ('Defiant', 'Defiant'): (-100, -100)  # dead!
 }
 
@@ -118,17 +118,17 @@ def simulate_game_population(population, rounds):
     history = []
 
     # Lists to track the number of each player type over rounds
-    always_betray_count = [0]  # Initialize with starting count
+    always_betray_count = [0] 
     always_cooperate_count = [0]
     random_count = [0]
     learning_count=[0]
-    total_bot_count = [len(population)]  # Initialize with total bots count
+    total_bot_count = [len(population)]
 
     # New lists for crashes, average and median scores
     crash_count = []
     avg_scores = []
     median_scores = []
-    # winning_scores = []
+    
 
     # Track initial player counts
     always_betray_count[0] = sum(1 for player in population if isinstance(player, AlwaysBetray) and player.alive)
@@ -236,19 +236,19 @@ def get_bot_numbers():
     always_betray = int(input("AlwaysBetray: "))
     always_cooperate = int(input("AlwaysCooperate: "))
     random_player = int(input("Random: "))
-    learning_bot = int(input("LearningBot: "))  # New input for LearningBot
+    learning_bot = int(input("LearningBot: "))
 
     bot_numbers['AlwaysBetray'] = always_betray
     bot_numbers['AlwaysCooperate'] = always_cooperate
     bot_numbers['Random'] = random_player
-    bot_numbers['LearningBot'] = learning_bot  # Store LearningBot number
+    bot_numbers['LearningBot'] = learning_bot
 
     return bot_numbers
 
-# Get user input for bot numbers
+
 bot_numbers = get_bot_numbers()
 
-# Initialize the population based on user input
+
 population = [AlwaysBetray() for _ in range(bot_numbers['AlwaysBetray'])] + \
              [AlwaysCooperate() for _ in range(bot_numbers['AlwaysCooperate'])] + \
              [RandomPlayer() for _ in range(bot_numbers['Random'])] + \
