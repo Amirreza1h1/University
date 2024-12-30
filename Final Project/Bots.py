@@ -1,4 +1,5 @@
 import random
+
 # Base class for a player
 class Bot_Player:
     def __init__(self, type):
@@ -15,26 +16,12 @@ class Bot_Player:
         raise NotImplementedError("Subclasses should implement this!")
 
     def reproduce(self):
-        offspring = self.__class__()
+        if isinstance(self, ProbabilisticPlayer):
+            offspring = self.__class__(self.defiant_prob)
+        else:
+            offspring = self.__class__()
         offspring.score = 100  # Reset score to initial value
         return offspring
-    
-    @staticmethod
-    def get_bot_numbers():
-        bot_numbers = {}
-
-        print("\nEnter the number of bots for each category:")
-        always_betray = int(input("AlwaysBetray: "))
-        always_cooperate = int(input("AlwaysCooperate: "))
-        random_player = int(input("Random: "))
-        learning_bot = int(input("LearningBot: "))
-
-        bot_numbers['AlwaysBetray'] = always_betray
-        bot_numbers['AlwaysCooperate'] = always_cooperate
-        bot_numbers['Random'] = random_player
-        bot_numbers['LearningBot'] = learning_bot
-
-        return bot_numbers
 
 # Always betrays (plays 'Defiant')
 class AlwaysBetray(Bot_Player):
@@ -53,14 +40,38 @@ class AlwaysCooperate(Bot_Player):
         return "Trusting"
 
 # Plays randomly (Trusting or Defiant)
-class RandomPlayer(Bot_Player):
-    def __init__(self):
-        super().__init__("Random")
-        self.moves = ('Trusting', 'Defiant')
+# class RandomPlayer(Bot_Player):
+#     def __init__(self):
+#         super().__init__("Random")
+#         self.moves = ('Trusting', 'Defiant')
+
+#     def play(self, history):
+#         return random.choice(self.moves)
+
+
+# Plays randomly with a given probability of choosing Defiant
+class ProbabilisticPlayer(Bot_Player):
+    def __init__(self, defiant_prob):
+        super().__init__(f"Prob{int(defiant_prob * 100)}Defiant")
+        self.defiant_prob = defiant_prob
 
     def play(self, history):
-        return random.choice(self.moves)
+        return "Defiant" if random.random() < self.defiant_prob else "Trusting"
     
+
+# Analyzes previous round's moves and adapts
+class AdaptivePlayer(Bot_Player):
+    def __init__(self):
+        super().__init__("Adaptive")
+
+    def play(self, history):
+        if not history:
+            return "Trusting"
+        defiant_count = sum(1 for move1, move2 in history if move1 == "Defiant" or move2 == "Defiant")
+        trusting_count = len(history) * 2 - defiant_count
+        return "Trusting" if defiant_count > trusting_count else "Defiant"
+
+
 class LearningBot(Bot_Player):
     def __init__(self):
         super().__init__("LearningBot")
