@@ -39,16 +39,6 @@ class AlwaysCooperate(Bot_Player):
     def play(self, history):
         return "Trusting"
 
-# Plays randomly (Trusting or Defiant)
-# class RandomPlayer(Bot_Player):
-#     def __init__(self):
-#         super().__init__("Random")
-#         self.moves = ('Trusting', 'Defiant')
-
-#     def play(self, history):
-#         return random.choice(self.moves)
-
-
 # Plays randomly with a given probability of choosing Defiant
 class ProbabilisticPlayer(Bot_Player):
     def __init__(self, defiant_prob):
@@ -57,7 +47,6 @@ class ProbabilisticPlayer(Bot_Player):
 
     def play(self, history):
         return "Defiant" if random.random() < self.defiant_prob else "Trusting"
-    
 
 # Analyzes previous round's moves and adapts
 class AdaptivePlayer(Bot_Player):
@@ -67,30 +56,23 @@ class AdaptivePlayer(Bot_Player):
     def play(self, history):
         if not history:
             return "Trusting"
-        defiant_count = sum(1 for move1, move2 in history if move1 == "Defiant" or move2 == "Defiant")
+        defiant_count = sum(
+            1 for move1, move2 in history if move1 == "Defiant" or move2 == "Defiant")
         trusting_count = len(history) * 2 - defiant_count
         return "Trusting" if defiant_count > trusting_count else "Defiant"
 
+# # Fuzzy Logic Bot
+# class FuzzyLogicBot(Bot_Player):
+#     def __init__(self):
+#         super().__init__("FuzzyLogicBot")
 
-class LearningBot(Bot_Player):
-    def __init__(self):
-        super().__init__("LearningBot")
-        self.history = []  # Track outcomes of past rounds
-
-    def play(self, history):
-        if len(self.history) < 5:  # Use last 5 outcomes for learning
-            return "Trusting"  # Default to Trusting initially
-
-        # Calculate the success rate of past moves
-        betray_success = sum(1 for outcome in self.history if outcome == 'Defiant')
-        trust_success = sum(1 for outcome in self.history if outcome == 'Trusting')
-
-        # Adapt strategy based on success rates
-        if trust_success > betray_success:
-            return "Defiant"  # More successful with trusting, now betray
-        else:
-            return "Trusting"  # More successful with betraying, now trust
-
-    def update_score(self, outcome):
-        super().update_score(outcome)
-        self.history.append("Defiant" if outcome > 0 else "Trusting")  # Record outcome
+#     def play(self, history):
+#         if not history:
+#             return "Trusting"
+#         defiant_ratio = sum(
+#             1 for move1, move2 in history if move1 == "Defiant") / len(history)
+#         if defiant_ratio > 0.7:
+#             return "Defiant"  # Opponent mostly defiant
+#         elif defiant_ratio < 0.3:
+#             return "Trusting"  # Opponent mostly trusting
+#         return "Defiant" if self.score > 50 else "Trusting"
