@@ -78,14 +78,13 @@ class Game():
             offspring_pop.append(child)
             population.append(child)
         
-        for os in offspring_pop:
-            print(os.type)
+        for ofs in offspring_pop:
+            print(ofs.type)
 
         return population, offspring_pop
     
     def simulate_game_population(self, population, rounds=100):
         end_condition=0
-        round_histories = []
         full_history = []
 
         type_counts = {player.type: [] for player in population}
@@ -107,7 +106,6 @@ class Game():
                 return
 
             round_history = []
-            last_round = round_histories[-1] if round_histories else []
 
             random.shuffle(population)
             round_crashes = 0
@@ -116,18 +114,26 @@ class Game():
             while i < len(population) - 1:
                 player1 = population[i]
                 player2 = population[i + 1]
-                crash = self.play_round(player1, player2, round_history, last_round, full_history)
+                crash = self.play_round(player1, player2, round_history, full_history)
                 round_crashes += crash
                 i += 2
 
-            round_histories.append(round_history)
-            full_history.extend(round_histories)
+            full_history.append(round_history)
             crash_count.append(round_crashes)
 
             deaths_this_round = sum(not p.alive or p.score <= 0 for p in population)
 
             # Remove dead bots
             population = [p for p in population if p.alive and p.score > 0]
+
+            # Reproduction logic
+            if deaths_this_round == 0:
+                population, player = self.reproduce_population_first(population)
+                offspring_counts[player.type] += 1
+            if deaths_this_round > 0 and population:
+                population, offspring_pop = self.reproduce_population_crash_top_percent(population, deaths_this_round)
+                for player in offspring_pop:
+                    offspring_counts[player.type] += 1
 
             # Count players per type
             current_counts = {ptype: 0 for ptype in type_counts}
@@ -141,15 +147,6 @@ class Game():
                 if count == 0 and ptype not in extinct_types:
                     print(f"\n⚠️ Bot type '{ptype}' has gone extinct at round {frame+1}!")
                     extinct_types.add(ptype)
-
-            # Reproduction logic
-            if deaths_this_round == 0:
-                population, player = self.reproduce_population_first(population)
-                offspring_counts[player.type] += 1
-            if deaths_this_round > 0 and population:
-                population, offspring_pop = self.reproduce_population_crash_top_percent(population, deaths_this_round)
-                for player in offspring_pop:
-                    offspring_counts[player.type] += 1
 
             # --- Clear and plot on separate figures ---
             ax1.clear()
