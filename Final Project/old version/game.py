@@ -234,6 +234,14 @@ class Game():
             plt.gca().invert_yaxis()
             plt.title("Final Top Bots by Score")
             plt.show()
+            
+            #Extinction summary
+            print("\n📉 Extinction Summary:")
+            if extinct_types:
+                for ptype, round_num in extinct_types.items():
+                    print(f"  - {ptype} went extinct at round {round_num}")
+            else:
+                print("  No bot types went extinct!")
 
         initial_counts = {ptype: 0 for ptype in type_counts}
         for player in population:
@@ -243,11 +251,3 @@ class Game():
 
         ani = animation.FuncAnimation(fig1, update, frames=rounds, repeat=False)
         plt.show()
-
-        #Extinction summary
-        print("\n📉 Extinction Summary:")
-        if extinct_types:
-            for ptype, round_num in extinct_types.items():
-                print(f"  - {ptype} went extinct at round {round_num}")
-        else:
-            print("  No bot types went extinct!")
