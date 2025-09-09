@@ -8,9 +8,9 @@ class Bot_Player:
         self.alive = True
 
     def update_score(self, outcome):
-        if outcome == -100:
-            self.alive = False
         self.score += outcome
+        if outcome == -100 or self.score <= 0:
+            self.alive = False
 
     def play(self, history):
         raise NotImplementedError("Subclasses should implement this!")
@@ -48,31 +48,21 @@ class ProbabilisticPlayer(Bot_Player):
     def play(self, history):
         return "Defiant" if random.random() < self.defiant_prob else "Trusting"
 
-# Analyzes previous round's moves and adapts
-class AdaptivePlayer(Bot_Player):
+class FullAdaptivePlayer(Bot_Player):
     def __init__(self):
-        super().__init__("Adaptive")
+        super().__init__("FullAdaptive")
 
     def play(self, history):
         if not history:
             return "Trusting"
-        defiant_count = sum(
-            1 for move1, move2 in history if move1 == "Defiant" or move2 == "Defiant")
-        trusting_count = len(history) * 2 - defiant_count
+
+        # Flatten if history is nested (full_history case)
+        if isinstance(history[0], list):
+            moves = [m for round_data in history for m in round_data]
+        else:
+            moves = history  # already a flat list (like last_round)
+
+        defiant_count = sum(1 for move1, move2 in moves if move1 == "Defiant" or move2 == "Defiant")
+        trusting_count = len(moves) * 2 - defiant_count
+
         return "Trusting" if defiant_count > trusting_count else "Defiant"
-
-# # Fuzzy Logic Bot
-# class FuzzyLogicBot(Bot_Player):
-#     def __init__(self):
-#         super().__init__("FuzzyLogicBot")
-
-#     def play(self, history):
-#         if not history:
-#             return "Trusting"
-#         defiant_ratio = sum(
-#             1 for move1, move2 in history if move1 == "Defiant") / len(history)
-#         if defiant_ratio > 0.7:
-#             return "Defiant"  # Opponent mostly defiant
-#         elif defiant_ratio < 0.3:
-#             return "Trusting"  # Opponent mostly trusting
-#         return "Defiant" if self.score > 50 else "Trusting"

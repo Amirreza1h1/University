@@ -1,0 +1,16 @@
+Scenario,Type,Description,Composition,Total Bots,Purpose,Random_Coop_Percent,Random_Betray_Percent
+S1,Comparison,AlwaysCooperate vs AlwaysBetray,10 Coop / 10 Betray,20,Test betrayal dominance,,
+S2,Comparison,Adaptive vs Random(80% Coop),10 Adaptive / 10 Random(80%),20,Test adaptation vs stochastic,,
+S3,Comparison,Probabilistic(50%) vs AlwaysBetray,10 Prob(50%) / 10 Betray,20,Check balance vs aggression,,
+S4,Mixed World,25% of 4 strategies,10 Coop / 10 Betray / 10 Adaptive / 10 Random,40,Study ecosystem interaction,,
+S5,Mixed World,Adaptive dominant,20 Adaptive / 20 Betray / 10 Coop,50,See if Adaptive can stabilize,,
+S6,Mixed World,Random(70%) vs Betray,30 Random(70%) / 20 Betray,50,Can Random survive betrayal?,70,30
+S7,Random Sensitivity,Random(90%) vs Coop,10 Random(90%) / 10 Coop,20,Test betrayal heavy randomness,90,10
+S8,Random Sensitivity,Random(50%) vs Adaptive,10 Random(50%) / 10 Adaptive,20,Test middle randomness vs learning,50,50
+S9,Random Sensitivity,Random(10%) vs Betray,10 Random(10%) / 10 Betray,20,Test resistance of good-natured randomness,10,90
+S10,Evolutionary,Equal mix of 4 strategies,"10 each of Coop, Betray, Adaptive, Random",40,Observe evolutionary trend,,
+S11,Evolutionary,5 Adaptive vs 35 Betray,5 Adaptive / 35 Betray,40,Can Adaptive grow?,,
+S12,Evolutionary,RandomPlayer mutation (changing % each gen),50 Random (mutating),50,Observe genetic impact,,
+S13,Environment,"Long game, high reproduction",Variable strategies,50,Fast ecosystem evolution,,
+S14,Environment,"Shorter game, low reproduction",Variable strategies,50,"Slow, stable evolution",,
+S15,Environment,Game ends on certain win ratio,Variable strategies,50,Different end condition test,,

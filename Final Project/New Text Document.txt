@@ -1,9 +1,0 @@
-Making the Simulation More Dynamic
-Here are some ideas to make the simulation more interactive and reflective of evolutionary dynamics:
-
-Adaptive Strategies: Allow players to change their strategy based on outcomes, such as a "LearningBot" that adapts based on past rounds.
-Decay in Scores: Introduce a slight decay in scores each round, representing survival costs, which could pressure bots to engage in more cooperative behavior.
-Random Events: Add random environmental factors or events that could impact scores or enforce crashes, such as an occasional “disaster” round that penalizes all players.
-Hybrid Strategies: Create bots that can switch between cooperative and defiant moves based on environmental factors, population density, or current round results.
-Scoring Metrics and Graphs: Track average and median scores each round, and visualize these alongside crashes and winner sums to observe score distributions.
-These changes would deepen the dynamics of the game, revealing how different strategies might evolve in response to shifting conditions.

@@ -1,0 +1,156 @@
+{
+    "test_case_1": {
+        "scenario": "S1",
+        "type": "Comparison",
+        "description": "AlwaysCooperate vs AlwaysBetray",
+        "purpose": "Test betrayal dominance",
+        "bots": {
+            "AlwaysBetray": 10,
+            "AlwaysCooperate": 10,
+            "Random-80": 0,
+            "Random-50": 0,
+            "Random-20": 0,
+            "FullAdaptiveBot": 0
+        }
+    },
+    "test_case_2": {
+        "scenario": "S2",
+        "type": "Comparison",
+        "description": "Adaptive vs Random(80% Coop)",
+        "purpose": "Test adaptation vs stochastic",
+        "bots": {
+            "AlwaysBetray": 0,
+            "AlwaysCooperate": 0,
+            "Random-80": 10,
+            "Random-50": 0,
+            "Random-20": 0,
+            "FullAdaptiveBot": 10
+        }
+    },
+    "test_case_3": {
+        "scenario": "S3",
+        "type": "Comparison",
+        "description": "Probabilistic(50%) vs AlwaysBetray",
+        "purpose": "Check balance vs aggression",
+        "bots": {
+            "AlwaysBetray": 10,
+            "AlwaysCooperate": 0,
+            "Random-80": 0,
+            "Random-50": 10,
+            "Random-20": 0,
+            "FullAdaptiveBot": 0
+        }
+    },
+    "test_case_4": {
+        "scenario": "S4",
+        "type": "Mixed World",
+        "description": "25% of 4 strategies",
+        "purpose": "Study ecosystem interaction",
+        "bots": {
+            "AlwaysBetray": 10,
+            "AlwaysCooperate": 10,
+            "Random-80": 0,
+            "Random-50": 0,
+            "Random-20": 0,
+            "FullAdaptiveBot": 10
+        }
+    },
+    "test_case_5": {
+        "scenario": "S5",
+        "type": "Mixed World",
+        "description": "Adaptive dominant",
+        "purpose": "See if Adaptive can stabilize",
+        "bots": {
+            "AlwaysBetray": 20,
+            "AlwaysCooperate": 20,
+            "Random-80": 0,
+            "Random-50": 0,
+            "Random-20": 0,
+            "FullAdaptiveBot": 20
+        }
+    },
+    "test_case_6": {
+        "scenario": "S6",
+        "type": "Mixed World",
+        "description": "Random(20%) vs Betray",
+        "purpose": "Can Random survive betrayal?",
+        "bots": {
+            "AlwaysBetray": 20,
+            "AlwaysCooperate": 0,
+            "Random-80": 0,
+            "Random-50": 0,
+            "Random-20": 30,
+            "FullAdaptiveBot": 0
+        }
+    },
+    "test_case_7": {
+        "scenario": "S7",
+        "type": "Random Sensitivity",
+        "description": "Random(20%) vs Coop",
+        "purpose": "Test betrayal heavy randomness",
+        "bots": {
+            "AlwaysBetray": 0,
+            "AlwaysCooperate": 10,
+            "Random-80": 0,
+            "Random-50": 0,
+            "Random-20": 10,
+            "FullAdaptiveBot": 0
+        }
+    },
+    "test_case_8": {
+        "scenario": "S8",
+        "type": "Random Sensitivity",
+        "description": "Random(50%) vs Adaptive",
+        "purpose": "Test middle randomness vs learning",
+        "bots": {
+            "AlwaysBetray": 0,
+            "AlwaysCooperate": 0,
+            "Random-80": 0,
+            "Random-50": 10,
+            "Random-20": 0,
+            "FullAdaptiveBot": 10
+        }
+    },
+    "test_case_9": {
+        "scenario": "S9",
+        "type": "Random Sensitivity",
+        "description": "Random(80%) vs Betray",
+        "purpose": "Test resistance of good-natured randomness",
+        "bots": {
+            "AlwaysBetray": 10,
+            "AlwaysCooperate": 0,
+            "Random-80": 10,
+            "Random-50": 0,
+            "Random-20": 0,
+            "FullAdaptiveBot": 0
+        }
+    },
+    "test_case_10": {
+        "scenario": "S10",
+        "type": "Evolutionary",
+        "description": "Equal mix of 4 strategies",
+        "purpose": "Observe evolutionary trend",
+        "bots": {
+            "AlwaysBetray": 10,
+            "AlwaysCooperate": 10,
+            "Random-80": 0,
+            "Random-50": 0,
+            "Random-20": 0,
+            "FullAdaptiveBot": 10
+        }
+    },
+    "test_case_11": {
+        "scenario": "S11",
+        "type": "Evolutionary",
+        "description": "5 Adaptive vs 35 Betray",
+        "purpose": "Can Adaptive grow?",
+        "bots": {
+            "AlwaysBetray": 35,
+            "AlwaysCooperate": 0,
+            "Random-80": 0,
+            "Random-50": 0,
+            "Random-20": 0,
+            "FullAdaptiveBot": 5
+        }
+    }
+}
