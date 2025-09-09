@@ -106,7 +106,7 @@ class Game():
                 return
 
             round_history = []
-
+            population = [p for p in population if p.alive and p.score > 0]
             random.shuffle(population)
             round_crashes = 0
             end_condition+=1

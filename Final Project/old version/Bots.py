@@ -56,6 +56,7 @@ class FullAdaptiveBot(Bot_Player):
         if not history:
             return "Trusting"
 
+        
         # Flatten if history is nested (full_history case)
         if isinstance(history[0], list):
             moves = [m for round_data in history for m in round_data]
