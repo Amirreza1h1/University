@@ -130,7 +130,7 @@ class Game():
             if deaths_this_round == 0:
                 population, player = self.reproduce_population_first(population)
                 offspring_counts[player.type] += 1
-            if deaths_this_round > 0 and population:
+            elif deaths_this_round > 0 and population:
                 population, offspring_pop = self.reproduce_population_crash_top_percent(population, deaths_this_round)
                 for player in offspring_pop:
                     offspring_counts[player.type] += 1
