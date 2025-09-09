@@ -48,9 +48,9 @@ class ProbabilisticPlayer(Bot_Player):
     def play(self, history):
         return "Defiant" if random.random() < self.defiant_prob else "Trusting"
 
-class FullAdaptivePlayer(Bot_Player):
+class FullAdaptiveBot(Bot_Player):
     def __init__(self):
-        super().__init__("FullAdaptive")
+        super().__init__("FullAdaptiveBot")
 
     def play(self, history):
         if not history:

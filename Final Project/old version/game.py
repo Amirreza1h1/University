@@ -33,7 +33,7 @@ class Game():
 
         # Give correct history input depending on bot type
         def get_history(player):
-            if player.type == "FullAdaptive":
+            if player.type == "FullAdaptiveBot":
                 return full_history
             else:
                 return

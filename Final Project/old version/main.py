@@ -9,7 +9,7 @@ if __name__ == "__main__":
         [bot.ProbabilisticPlayer(0.8) for _ in range(bot_numbers['Random_80'])] + \
         [bot.ProbabilisticPlayer(0.5) for _ in range(bot_numbers['Random_50'])] + \
         [bot.ProbabilisticPlayer(0.2) for _ in range(bot_numbers['Random_20'])] + \
-        [bot.FullAdaptivePlayer() for _ in range(bot_numbers['FullAdaptiveBot'])]
+        [bot.FullAdaptiveBot() for _ in range(bot_numbers['FullAdaptiveBot'])]
     
     print("")
     rounds = int(input("\nEnter number of rounds:"))
