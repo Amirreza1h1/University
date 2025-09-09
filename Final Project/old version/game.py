@@ -90,7 +90,7 @@ class Game():
         type_counts = {player.type: [] for player in population}
         crash_count = []
         offspring_counts = {ptype: 0 for ptype in type_counts}
-        extinct_types = set()
+        extinct_types = {}
         game_over = False
 
         # Create 4 separate figures (windows)
@@ -146,7 +146,7 @@ class Game():
             for ptype, count in current_counts.items():
                 if count == 0 and ptype not in extinct_types:
                     print(f"\n⚠️ Bot type '{ptype}' has gone extinct at round {frame+1}!")
-                    extinct_types.add(ptype)
+                    extinct_types[ptype] = frame + 1  #record round of extinction
 
             # --- Clear and plot on separate figures ---
             ax1.clear()
@@ -243,3 +243,11 @@ class Game():
 
         ani = animation.FuncAnimation(fig1, update, frames=rounds, repeat=False)
         plt.show()
+
+        #Extinction summary
+        print("\n📉 Extinction Summary:")
+        if extinct_types:
+            for ptype, round_num in extinct_types.items():
+                print(f"  - {ptype} went extinct at round {round_num}")
+        else:
+            print("  No bot types went extinct!")
