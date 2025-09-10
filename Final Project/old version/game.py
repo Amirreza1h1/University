@@ -56,8 +56,6 @@ class Game():
         population.sort(key=lambda player: player.score, reverse=True)
 
         offspring = population[0].reproduce()
-        print(offspring.type+ "\n")
-        print(population[-1].type+ "\n")
 
         population.pop(-1)
         population.append(offspring)
@@ -77,9 +75,6 @@ class Game():
             child = parent.reproduce()
             offspring_pop.append(child)
             population.append(child)
-        
-        for ofs in offspring_pop:
-            print(ofs.type)
 
         return population, offspring_pop
     
@@ -110,6 +105,8 @@ class Game():
             random.shuffle(population)
             round_crashes = 0
             end_condition+=1
+
+
             i = 0
             while i < len(population) - 1:
                 player1 = population[i]
@@ -120,6 +117,11 @@ class Game():
 
             full_history.append(round_history)
             crash_count.append(round_crashes)
+
+            # full adaptive logs
+            # for player in population:
+            #     if player.type=="FullAdaptiveBot":
+            #         player.print_decisions()
 
             deaths_this_round = sum(not p.alive or p.score <= 0 for p in population)
 

@@ -49,21 +49,47 @@ class ProbabilisticPlayer(Bot_Player):
         return "Defiant" if random.random() < self.defiant_prob else "Trusting"
 
 class FullAdaptiveBot(Bot_Player):
+    _id_counter = 0  # unique IDs for logging
+
     def __init__(self):
         super().__init__("FullAdaptiveBot")
+        self.id = FullAdaptiveBot._id_counter
+        FullAdaptiveBot._id_counter += 1
+        self.history_log = []  # store decision history for debugging
 
     def play(self, history):
         if not history:
-            return "Trusting"
+            decision = "Trusting"
+            self.history_log.append((0, 0, decision, 0))
+            return decision
 
-        
-        # Flatten if history is nested (full_history case)
-        if isinstance(history[0], list):
-            moves = [m for round_data in history for m in round_data]
-        else:
-            moves = history  # already a flat list (like last_round)
+        # --- Flatten global history (list of rounds → list of matches) ---
+        if isinstance(history[0], list):  
+            moves = [pair for round_data in history for pair in round_data]
+        else:  
+            moves = history  # already flat list of (m1, m2) pairs (round 1)
 
-        defiant_count = sum(1 for move1, move2 in moves if move1 == "Defiant" or move2 == "Defiant")
-        trusting_count = len(moves) * 2 - defiant_count
+        # --- Count *individual moves* ---
+        defiant_count = sum(1 for m1, m2 in moves if m1 == "Defiant") + \
+                        sum(1 for m1, m2 in moves if m2 == "Defiant")
+        trusting_count = sum(1 for m1, m2 in moves if m1 == "Trusting") + \
+                         sum(1 for m1, m2 in moves if m2 == "Trusting")
+        total_moves = len(moves) * 2
 
-        return "Trusting" if defiant_count > trusting_count else "Defiant"
+        # --- Decision rule ---
+        decision = "Trusting" if trusting_count < defiant_count else "Defiant"
+
+        # --- Log for debugging ---
+        self.history_log.append((defiant_count, trusting_count, decision, total_moves))
+        return decision
+
+    # print every information a single one of the FullAdaptiveBot has to do a decision
+    # def print_decisions(self):
+    #     print(f"\n🧠 FullAdaptiveBot {self.id} Decisions Log")
+    #     print("=" * 60)
+    #     for r, (d, t, choice, history_len) in enumerate(self.history_log, 1):
+    #         print(
+    #             f"Round {r:02d} | Defiant seen: {d:3d} | Trusting seen: {t:3d} "
+    #             f"| Decision: {choice:9s} | History (moves): {history_len} | score: {self.score}"
+    #         )
+    #     print("=" * 60)
