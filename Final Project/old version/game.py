@@ -112,10 +112,10 @@ class Game():
                 player1 = population[i]
                 player2 = population[i + 1]
                 crash = self.play_round(player1, player2, round_history, full_history)
+                full_history.append(round_history)
                 round_crashes += crash
                 i += 2
 
-            full_history.append(round_history)
             crash_count.append(round_crashes)
 
             # full adaptive logs
