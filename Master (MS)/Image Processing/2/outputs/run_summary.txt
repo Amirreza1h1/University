@@ -1,0 +1,4 @@
+Initial matches (before RANSAC): 14
+Inliers (after RANSAC): 5
+Inlier ratio: 35.71%
+RANSAC params: MaxDistance=3.00, MaxNumTrials=4000, Confidence=99.9
