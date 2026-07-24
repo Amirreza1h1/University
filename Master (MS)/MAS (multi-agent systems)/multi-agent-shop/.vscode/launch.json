@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Multi-Agent Shop",
+            "request": "launch",
+            "mainClass": "ir.ac.mas.shop.Main",
+            "vmArgs": "-Djava.net.preferIPv4Stack=true"
+        }
+    ]
+}

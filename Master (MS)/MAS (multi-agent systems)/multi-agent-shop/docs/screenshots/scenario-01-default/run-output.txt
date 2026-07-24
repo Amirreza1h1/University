@@ -1,0 +1,76 @@
+﻿[main] Selected scenario: default
+[main] Initial screenshot delay: 0 ms
+[main] GUI enabled: false
+[main] 1B -> product=B, effective delay=500 ms
+[main] 2B -> product=B, effective delay=1000 ms
+[main] 3B -> product=B, effective delay=1500 ms
+[main] 4B -> product=B, effective delay=2000 ms
+Jul 15, 2026 9:54:02 PM jade.core.Runtime beginContainer
+INFO: ----------------------------------
+    This is JADE 4.6.0 - revision 6869 of 30-11-2022 14:47:03
+    downloaded in Open Source, under LGPL restrictions,
+    at http://jade.tilab.com/
+----------------------------------------
+Jul 15, 2026 9:54:02 PM jade.imtp.leap.LEAPIMTPManager initialize
+INFO: Listening for intra-platform commands on address:
+- jicp://127.0.0.1:7778
+Jul 15, 2026 9:54:02 PM jade.core.BaseService init
+INFO: Service jade.core.management.AgentManagement initialized
+Jul 15, 2026 9:54:02 PM jade.core.BaseService init
+INFO: Service jade.core.messaging.Messaging initialized
+Jul 15, 2026 9:54:02 PM jade.core.BaseService init
+INFO: Service jade.core.resource.ResourceManagement initialized
+Jul 15, 2026 9:54:02 PM jade.core.BaseService init
+INFO: Service jade.core.mobility.AgentMobility initialized
+Jul 15, 2026 9:54:02 PM jade.core.BaseService init
+INFO: Service jade.core.event.Notification initialized
+Jul 15, 2026 9:54:02 PM jade.mtp.http.HTTPServer <init>
+INFO: HTTP-MTP Using XML parser com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser
+Jul 15, 2026 9:54:02 PM jade.mtp.http.HTTPServer <init>
+WARNING: Port 7778 is already in used, selected another one
+Jul 15, 2026 9:54:02 PM jade.core.messaging.MessagingService boot
+INFO: MTP addresses:
+http://host.docker.internal:4841/acc
+Jul 15, 2026 9:54:02 PM jade.core.AgentContainerImpl joinPlatform
+INFO: --------------------------------------
+Agent container Main-Container@127.0.0.1 is ready.
+--------------------------------------------
+[main] JADE main container started at 127.0.0.1:7778 with GUI disabled
+[seller] Seller started with inventory {A=2, B=2}
+[1B] Buyer started: product=B, delay=500 ms, seller=seller
+[2B] Buyer started: product=B, delay=1000 ms, seller=seller
+[4B] Buyer started: product=B, delay=2000 ms, seller=seller
+[3B] Buyer started: product=B, delay=1500 ms, seller=seller
+[1B] Requesting product B
+[seller] Received request for B from 1B
+[seller] Sale completed: buyer=1B, product=B, remaining=1
+[1B] Purchase successful: B
+[1B] Purchased products: [B]
+[1B] Buyer stopped
+[2B] Requesting product B
+[seller] Received request for B from 2B
+[seller] Sale completed: buyer=2B, product=B, remaining=0
+[2B] Purchase successful: B
+[2B] Purchased products: [B]
+[2B] Buyer stopped
+[3B] Requesting product B
+[seller] Received request for B from 3B
+[seller] Sale refused: buyer=3B is not allowed to purchase product=B
+[3B] Purchase refused: Buyer 3B is not allowed to purchase B
+[3B] Purchased products: []
+[3B] Buyer stopped
+[4B] Requesting product B
+[seller] Received request for B from 4B
+[seller] Sale failed: product=B is out of stock for buyer=4B
+[seller] Final inventory: {A=2, B=0}
+[4B] Purchase failed: Product B is out of stock
+[4B] Purchased products: []
+[seller] Successful buyers: [1B, 2B]
+[seller] Processed requests: 4
+[4B] Buyer stopped
+[seller] Non-GUI validation complete; shutting down JADE
+[seller] Seller stopped
+Jul 15, 2026 9:54:05 PM jade.core.messaging.MessageManager shutdown
+INFO: MessageManager shutting down ...
+Jul 15, 2026 9:54:05 PM jade.core.Runtime$1 run
+INFO: JADE is closing down now.

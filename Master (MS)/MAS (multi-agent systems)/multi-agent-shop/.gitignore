@@ -1,0 +1,19 @@
+target/
+*.class
+
+# JADE runtime metadata
+APDescription.txt
+MTPs-*.txt
+
+# Java IDE metadata
+.classpath
+.project
+.settings/
+
+# Logs and operating-system files
+*.log
+.DS_Store
+Thumbs.db
+
+/.codex
+/AGENTS.md
