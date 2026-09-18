@@ -1,3 +1,15 @@
-__pycache__/*
-__pycache__/
-__pycache__
+# Public repository: documentation, result image, and the Windows download.
+# Everything else stays local, including Python sources and source archives.
+/*
+!/.gitignore
+!/README.md
+!/software/
+!/docs/
+
+# Only publish the image used by the READMEs from the docs folder.
+/docs/*
+!/docs/images/
+/docs/images/*
+!/docs/images/final-results.png
+
+# The software folder has its own list of files to publish.

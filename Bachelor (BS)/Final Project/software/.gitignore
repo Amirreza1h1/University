@@ -1,0 +1,7 @@
+# Keep application source, dependencies, build files, tests, and local data here.
+# Only these distribution files should be added to Git.
+/*
+!/.gitignore
+!/README.md
+!/software.exe
+!/game-result.png
